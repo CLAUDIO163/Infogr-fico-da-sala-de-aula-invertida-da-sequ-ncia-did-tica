@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microclima Urbano - Infográfico</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 30px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.95;
+            margin-bottom: 15px;
+        }
+        
+        .flipped-classroom {
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 30px;
+            display: inline-block;
+            font-weight: bold;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            animation: fadeIn 0.8s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .definition-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .definition-box::before {
+            content: "🌡️";
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 3em;
+            opacity: 0.3;
+        }
+        
+        .definition-box h2 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        
+        .heat-island {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        
+        .heat-island h3 {
+            font-size: 1.6em;
+            margin-bottom: 15px;
+            color: #d62828;
+        }
+        
+        .causes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .cause-card {
+            background: white;
+            border: 3px solid #f0f0f0;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .cause-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border-color: #667eea;
+        }
+        
+        .cause-card .icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .cause-card h4 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .comparison-card {
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .without-trees {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffd93d 100%);
+            color: white;
+        }
+        
+        .with-trees {
+            background: linear-gradient(135deg, #6bcf7f 0%, #4ecdc4 100%);
+            color: white;
+        }
+        
+        .comparison-card h3 {
+            font-size: 1.4em;
+            margin-bottom: 20px;
+        }
+        
+        .comparison-card .temp {
+            font-size: 2em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .comparison-card .humidity {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        
+        .impacts {
+            background: #fff3e0;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        
+        .impacts h3 {
+            color: #ff6b35;
+            font-size: 1.6em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .impact-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .impact-item {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .impact-item .icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .solutions {
+            background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            color: white;
+        }
+        
+        .solutions h3 {
+            font-size: 1.6em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        
+        .solution-card {
+            background: rgba(255,255,255,0.9);
+            color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .solution-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .solution-card .icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .controversy {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .controversy h3 {
+            font-size: 1.8em;
+            color: #2d3436;
+            margin-bottom: 20px;
+        }
+        
+        .controversy .balance {
+            font-size: 3em;
+            margin: 20px 0;
+        }
+        
+        .activity-box {
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        
+        .activity-box h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .activity-box p {
+            line-height: 1.8;
+            color: #495057;
+        }
+        
+        .reference {
+            font-size: 0.9em;
+            color: #666;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="flipped-classroom">🔄 SALA DE AULA INVERTIDA</div>
+            <h1>🌡️🏙️ MICROCLIMA URBANO</h1>
+            <p class="subtitle">Como as cidades modificam o clima local</p>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <div class="definition-box">
+                    <h2>O QUE É?</h2>
+                    <p style="font-size: 1.1em; line-height: 1.6;">
+                        O microclima urbano são as <strong>condições climáticas específicas</strong> que se formam nas cidades, 
+                        diferentes do clima da região circundante. As construções, asfalto e atividades humanas criam um 
+                        ambiente único com temperaturas, umidade e ventos próprios.
+                    </p>
+                    <p class="reference" style="margin-top: 15px;">(Cardoso & Amorim, 2014)</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div class="heat-island">
+                    <h3>🔥 ILHA DE CALOR URBANA</h3>
+                    <p style="font-size: 1.1em; line-height: 1.6;">
+                        Fenômeno onde as <strong>áreas urbanas ficam mais quentes</strong> que as rurais. 
+                        Pode haver diferença de <strong>2°C a 10°C</strong> entre o centro da cidade e a periferia, 
+                        especialmente à noite.
+                    </p>
+                    <p class="reference" style="margin-top: 10px;">(Oke, 1982)</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 style="text-align: center; color: #333; margin-bottom: 30px;">🏗️ PRINCIPAIS CAUSAS</h2>
+                <div class="causes-grid">
+                    <div class="cause-card">
+                        <div class="icon">🏢</div>
+                        <h4>CONCRETO E ASFALTO</h4>
+                        <p>Absorvem e irradiam calor durante o dia e noite</p>
+                        <p class="reference">(Amorim, 2010)</p>
+                    </div>
+                    <div class="cause-card">
+                        <div class="icon">🚗</div>
+                        <h4>POLUIÇÃO</h4>
+                        <p>Carros e indústrias liberam calor e gases</p>
+                        <p class="reference">(Leal, Biondi & Batista, 2014)</p>
+                    </div>
+                    <div class="cause-card">
+                        <div class="icon">🌳❌</div>
+                        <h4>REDUÇÃO DE VEGETAÇÃO</h4>
+                        <p>Menos árvores = menos sombra e resfriamento</p>
+                    </div>
+                    <div class="cause-card">
+                        <div class="icon">🌬️</div>
+                        <h4>ALTERAÇÃO DOS VENTOS</h4>
+                        <p>Prédios alteram circulação do ar</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 style="text-align: center; color: #333; margin-bottom: 30px;">📊 COMPARAÇÃO: ÁREA COM E SEM ÁRVORES</h2>
+                <div class="comparison">
+                    <div class="comparison-card without-trees">
+                        <h3>🏢☀️ SEM ÁRVORES</h3>
+                        <div class="temp">🌡️ 35°C a 40°C</div>
+                        <div class="humidity">💧 Umidade: 30 a 40%</div>
+                        <p style="margin-top: 15px;">☀️ Radiação direta</p>
+                        <p class="reference" style="margin-top: 10px;">(Romero, 2011)</p>
+                    </div>
+                    <div class="comparison-card with-trees">
+                        <h3>🌳🌿 COM ÁRVORES</h3>
+                        <div class="temp">🌡️ 25°C a 30°C</div>
+                        <div class="humidity">💧 Umidade: 50-60%</div>
+                        <p style="margin-top: 15px;">🌳 Sombra e ventilação</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div class="impacts">
+                    <h3>⚠️ IMPACTOS NA POPULAÇÃO</h3>
+                    <div class="impact-items">
+                        <div class="impact-item">
+                            <div class="icon">🏥</div>
+                            <h4>SAÚDE</h4>
+                            <p>Desconforto térmico, doenças respiratórias</p>
+                        </div>
+                        <div class="impact-item">
+                            <div class="icon">💡</div>
+                            <h4>ENERGIA</h4>
+                            <p>Maior consumo de ar condicionado</p>
+                        </div>
+                        <div class="impact-item">
+                            <div class="icon">🌧️</div>
+                            <h4>CHUVAS</h4>
+                            <p>Chuvas intensas e alagamentos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div class="solutions">
+                    <h3>✅ SOLUÇÕES SUSTENTÁVEIS</h3>
+                    <div class="solution-grid">
+                        <div class="solution-card">
+                            <div class="icon">🌳</div>
+                            <h4>ARBORIZAÇÃO URBANA</h4>
+                            <p>Plantar mais árvores nas ruas e praças</p>
+                        </div>
+                        <div class="solution-card">
+                            <div class="icon">🏠</div>
+                            <h4>TELHADOS VERDES</h4>
+                            <p>Jardins suspensos em prédios</p>
+                        </div>
+                        <div class="solution-card">
+                            <div class="icon">🚲</div>
+                            <h4>MOBILIDADE SUSTENTÁVEL</h4>
+                            <p>Menos carros, mais transporte público</p>
+                        </div>
+                        <div class="solution-card">
+                            <div class="icon">💧</div>
+                            <h4>ÁREAS PERMEÁVEIS</h4>
+                            <p>Reduzir asfalto e concreto</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div class="controversy">
+                    <div class="balance">🌱⚖️</div>
+                    <h3>BIOLOGIA DA CONTROVÉRSIA</h3>
+                    <p style="font-size: 1.2em; color: #2d3436; margin-top: 20px;">
+                        <strong>Compreenda o microclima urbano para tomar decisões conscientes sobre nossa cidade!</strong>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="activity-box">
+                <h4>📝 ATIVIDADE</h4>
+                <p><strong>Observe o infográfico. Em seguida, escreva com suas próprias palavras o que você entendeu.</strong></p>
+                <p style="margin-top: 15px;">➡️ Descreva as ideias principais que o infográfico mostra, os dados que chamaram sua atenção e o que o infográfico quis nos mostrar.</p>
+            </div>
+            
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 10px; margin-top: 30px; text-align: center;">
+                <p style="font-size: 0.95em; line-height: 1.6;">
+                    <strong>Este infográfico é um fragmento da sequência didática do doutorado em Ensino de Ciências Exatas da UNIVATES-RS.</strong>
+                </p>
+                <p style="margin-top: 10px; font-size: 0.95em;">
+                    <strong>Autor: Cláudio da Silva Mendonça, 2025.</strong>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
